@@ -1,0 +1,16 @@
+//
+//  PrefixHeader.pch
+//  ImageList
+//
+//  Created by Tongtong Xu on 15/4/4.
+//  Copyright (c) 2015年 xxx Innovation Co. Ltd. All rights reserved.
+//
+
+#ifndef ImageList_PrefixHeader_pch
+#define ImageList_PrefixHeader_pch
+
+#define run_async_main(...) dispatch_async(dispatch_get_main_queue(), ^{ __VA_ARGS__ });
+
+#define run_async_background(...) dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{ __VA_ARGS__ });
+
+#endif
