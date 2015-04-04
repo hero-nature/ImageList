@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>C6C17C3E-8D37-4FFC-9937-376E5FB29B53</string>
+	<key>IDESourceControlProjectName</key>
+	<string>ImageList</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>FD9648868477DB4C404E766A2E3A4F3164905E83</key>
+		<string>https://github.com/hero-nature/ImageList</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>ImageList.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>FD9648868477DB4C404E766A2E3A4F3164905E83</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/hero-nature/ImageList</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>FD9648868477DB4C404E766A2E3A4F3164905E83</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>FD9648868477DB4C404E766A2E3A4F3164905E83</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ImageList</string>
+		</dict>
+	</array>
+</dict>
+</plist>

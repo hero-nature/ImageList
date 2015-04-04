@@ -152,7 +152,7 @@
             </objects>
             <point key="canvasLocation" x="524" y="928"/>
         </scene>
-        <!--1-->
+        <!--ImageDetail-->
         <scene sceneID="g9V-Gb-TYN">
             <objects>
                 <viewController storyboardIdentifier="ImageDetailViewController" automaticallyAdjustsScrollViewInsets="NO" id="uxm-6f-D3E" customClass="ImageDetailViewController" sceneMemberID="viewController">
@@ -168,14 +168,14 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pXm-AL-GMY" userLabel="Root Scroll View" customClass="ImageSwipeView">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pXm-AL-GMY" userLabel="Root Scroll View" customClass="ImageSwipeView">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eft-ky-8sp" userLabel="Content View">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                         <subviews>
                                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D0f-5q-GuP" userLabel="Left Scroll View">
-                                                <rect key="frame" x="320" y="0.0" width="320" height="504"/>
+                                                <rect key="frame" x="-320" y="0.0" width="320" height="504"/>
                                             </scrollView>
                                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OVn-ng-1ki" userLabel="Center Scroll View">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
@@ -189,6 +189,8 @@
                                             <constraint firstItem="OVn-ng-1ki" firstAttribute="height" secondItem="D0f-5q-GuP" secondAttribute="height" id="33k-5V-HMg"/>
                                             <constraint firstItem="D0f-5q-GuP" firstAttribute="leading" secondItem="OVn-ng-1ki" secondAttribute="trailing" id="3GS-uE-Pdi"/>
                                             <constraint firstItem="OVn-ng-1ki" firstAttribute="top" secondItem="D0f-5q-GuP" secondAttribute="top" id="S4R-cW-Wus"/>
+                                            <constraint firstItem="D0f-5q-GuP" firstAttribute="leading" secondItem="OVn-ng-1ki" secondAttribute="trailing" id="UjV-qy-MUg"/>
+                                            <constraint firstItem="OVn-ng-1ki" firstAttribute="leading" secondItem="D0f-5q-GuP" secondAttribute="trailing" id="Yy7-Tm-4BO"/>
                                             <constraint firstAttribute="trailing" secondItem="OVn-ng-1ki" secondAttribute="trailing" id="dNa-Tx-Qri"/>
                                             <constraint firstItem="OVn-ng-1ki" firstAttribute="width" secondItem="D0f-5q-GuP" secondAttribute="width" id="g7t-o1-f4m"/>
                                             <constraint firstItem="NC0-VP-bJ3" firstAttribute="leading" secondItem="OVn-ng-1ki" secondAttribute="trailing" id="m7e-1I-g2u"/>
@@ -196,6 +198,12 @@
                                             <constraint firstItem="NC0-VP-bJ3" firstAttribute="height" secondItem="OVn-ng-1ki" secondAttribute="height" id="tt4-qb-7X7"/>
                                             <constraint firstItem="NC0-VP-bJ3" firstAttribute="width" secondItem="OVn-ng-1ki" secondAttribute="width" id="xmt-x3-OdL"/>
                                         </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="3GS-uE-Pdi"/>
+                                                <exclude reference="UjV-qy-MUg"/>
+                                            </mask>
+                                        </variation>
                                     </view>
                                 </subviews>
                                 <constraints>
@@ -211,6 +219,8 @@
                                     <outlet property="centerScrollView" destination="OVn-ng-1ki" id="lHc-Kv-eFL"/>
                                     <outlet property="leftScrollView" destination="D0f-5q-GuP" id="5Oe-L7-liZ"/>
                                     <outlet property="rightScrollView" destination="NC0-VP-bJ3" id="X1S-B4-LbD"/>
+                                    <outlet property="swipeViewDataSource" destination="uxm-6f-D3E" id="zFh-CJ-gVh"/>
+                                    <outlet property="swipeViewDelegate" destination="uxm-6f-D3E" id="bJ6-9s-SI3"/>
                                 </connections>
                             </scrollView>
                         </subviews>
@@ -228,9 +238,12 @@
                             <constraint firstItem="sZk-DW-3rj" firstAttribute="leading" secondItem="QhX-DA-NHe" secondAttribute="leading" id="y45-e9-ftF"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="1" id="wj7-iM-s0c"/>
+                    <navigationItem key="navigationItem" title="ImageDetail" id="wj7-iM-s0c"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="swipeView" destination="pXm-AL-GMY" id="TEp-2B-yzN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RlY-dF-Y09" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

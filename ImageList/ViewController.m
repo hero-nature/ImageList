@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "ImageDetailViewController.h"
 #import "NetEngine.h"
 #import "CollectionViewImageCell.h"
 #import "AsynImageCache.h"
@@ -76,7 +77,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     CollectionViewImageCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:[CollectionViewImageCell reuseIdentifier] forIndexPath:indexPath];
-    cell.data = [[_dataSource objectAtIndex:indexPath.row] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    cell.data = [_dataSource objectAtIndex:indexPath.row];
     return cell;
 }
 
@@ -136,6 +137,12 @@
         self.errorMessageView.hidden = YES;
         self.errorMessageView.alpha = 1;
     }];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    ImageDetailViewController *detail = segue.destinationViewController;
+    [detail setDataSource:_dataSource currentIndex:[self.collection indexPathForCell:sender].row];
 }
 
 - (void)didReceiveMemoryWarning

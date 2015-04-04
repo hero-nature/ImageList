@@ -8,16 +8,42 @@
 
 #import "ImageDetailViewController.h"
 #import "AsynImageCache.h"
+#import "ImageSwipeView.h"
 
-@interface ImageDetailViewController ()
-
+@interface ImageDetailViewController () <ImageSwipeViewDataSource, ImageSwipeViewDelegate>
+@property (weak, nonatomic) IBOutlet ImageSwipeView *swipeView;
+@property (nonatomic, strong) NSArray *dataSource;
+@property (nonatomic) NSInteger index;
 @end
 
 @implementation ImageDetailViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.navigationItem.title = [NSString stringWithFormat:@"%ld",(long)_index];
+    [_swipeView scrollToImageAtIndex:_index];
+}
+
+- (void)setDataSource:(NSArray *)array currentIndex:(NSInteger)index
+{
+    _dataSource = array;
+    _index = index;
+}
+
+- (NSString *)swipeView:(ImageSwipeView *)swipeView imageURLAtIndex:(NSInteger)index
+{
+    return [_dataSource objectAtIndex:index];
+}
+
+- (NSInteger)numberOfImagesInSwipeView:(ImageSwipeView *)swipeView
+{
+    return _dataSource.count;
+}
+
+- (void)swipeView:(ImageSwipeView *)swipeView didShowImageAtIndex:(NSInteger)index
+{
+    self.navigationItem.title = [NSString stringWithFormat:@"%ld",(long)index];
 }
 
 - (void)didReceiveMemoryWarning {

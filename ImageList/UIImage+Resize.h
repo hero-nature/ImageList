@@ -11,4 +11,6 @@
 
 - (UIImage *)thumbnailImage:(NSInteger)thumbnailSize interpolationQuality:(CGInterpolationQuality)quality;
 
+- (UIImage *)resizedImage:(CGSize)newSize interpolationQuality:(CGInterpolationQuality)quality;
+
 @end

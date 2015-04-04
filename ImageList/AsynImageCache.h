@@ -9,6 +9,11 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSUInteger, AsynImageDecodeType) {
+    AsynImageDecodeTypeThumb,
+    AsynImageDecodeTypeNormal,
+};
+
 @interface AsynImageCache : NSObject
 /*!
  *  @author Tongtong Xu, 15-04-03 23:04:13
@@ -19,7 +24,7 @@
  *
  *  @return 图片对象，可能为nil
  */
-+ (UIImage *)cachedImageWithURL:(NSString *)imageURL;
++ (UIImage *)cachedImageWithURL:(NSString *)imageURL decodeType:(AsynImageDecodeType)type;
 /*!
  *  @author Tongtong Xu, 15-04-03 23:04:47
  *
@@ -30,7 +35,7 @@
  *
  *  @return 解码后的图片
  */
-+ (UIImage *)cacheImageWithData:(NSData *)imageData imageURL:(NSString *)imageURL;
++ (UIImage *)cacheImageWithData:(NSData *)imageData imageURL:(NSString *)imageURL decodeType:(AsynImageDecodeType)type;
 /*!
  *  @author Tongtong Xu, 15-04-03 23:04:35
  *

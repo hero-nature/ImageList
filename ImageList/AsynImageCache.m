@@ -44,10 +44,10 @@
  *  @param url   图片地址
  */
 
-+ (void)cacheImage:(UIImage *)image imageURL:(NSString *)url
++ (void)cacheImage:(UIImage *)image key:(NSString *)key
 {
-    if (image && url) {
-        [[AsynImageCache shared].imageDataCache setObject:image forKey:[self imageNameWithURL:url]];
+    if (image && key) {
+        [[AsynImageCache shared].imageDataCache setObject:image forKey:key];
     }
 }
 
@@ -63,49 +63,49 @@
 
 + (UIImage *)imageCachedWithKey:(NSString *)key
 {
-    NSCache *cache = [AsynImageCache shared].imageDataCache;
-    return [cache objectForKey:[self imageNameWithURL:key]];
+    return [[AsynImageCache shared].imageDataCache objectForKey:key];
 }
 
 #pragma mark - Public
 
-+ (UIImage *)cachedImageWithURL:(NSString *)imageURL
++ (UIImage *)cachedImageWithURL:(NSString *)imageURL decodeType:(AsynImageDecodeType)type
 {
-    id object = [self imageCachedWithKey:imageURL];
+    NSString *key = [self cacheKeyWithImageURL:imageURL decodeType:type];
+    
+    id object = [self imageCachedWithKey:key];
     if (object) {
-        NSLog(@"%@,load from memory",imageURL);
+        NSLog(@"%@_%@,load from memory",imageURL,type == AsynImageDecodeTypeThumb ? @"thumb" : @"normal");
         return object;
     }
     
     if ([[NSFileManager defaultManager] fileExistsAtPath:[self imageFilepathWithURL:imageURL]]) {
         NSData *data = [NSData dataWithContentsOfFile:[self imageFilepathWithURL:imageURL]];
-        UIImage *image = [self cacheImageWithData:data imageURL:imageURL];
-        NSLog(@"%@,load from disk,then save to memory",imageURL);
+        UIImage *image = [self cacheImageWithData:data imageURL:imageURL decodeType:type];
+        NSLog(@"%@_%@,load from disk,then save to memory",imageURL,type == AsynImageDecodeTypeThumb ? @"thumb" : @"normal");
         return image;
     }
     
-    NSLog(@"%@,need download form server",imageURL);
+    NSLog(@"%@_%@,need download form server",imageURL,type == AsynImageDecodeTypeThumb ? @"thumb" : @"normal");
     return nil;
 }
 
-+ (UIImage *)cacheImageWithData:(NSData *)imageData imageURL:(NSString *)imageURL
++ (UIImage *)cacheImageWithData:(NSData *)imageData imageURL:(NSString *)imageURL decodeType:(AsynImageDecodeType)type
 {
     UIImage *image = [UIImage imageWithData:imageData];
-    UIImage *decodedImage = [self decoderImage:image];
+    UIImage *decodedImage = [self decoderImage:image decodeType:type];
     if (![[NSFileManager defaultManager] fileExistsAtPath:[self imageFilepathWithURL:imageURL]]) {
         NSLog(@"%@,save to disk",imageURL);
         [imageData writeToFile:[self imageFilepathWithURL:imageURL] atomically:YES];
     }
     image = nil;
     imageData = nil;
-    [self cacheImage:decodedImage imageURL:imageURL];
+    [self cacheImage:decodedImage key:[self cacheKeyWithImageURL:imageURL decodeType:type]];
     return decodedImage;
 }
 
 + (void)clearMemoryCache
 {
-    NSCache *cache = [AsynImageCache shared].imageDataCache;
-    [cache removeAllObjects];
+    [[AsynImageCache shared].imageDataCache removeAllObjects];
 }
 
 + (void)clearDiskCache
@@ -115,9 +115,41 @@
 
 #pragma mark - Private
 
-+ (UIImage *)decoderImage:(UIImage *)image
+/*!
+ *  @author Tongtong Xu, 15-04-04 12:04:26
+ *
+ *  @brief  Decode Image
+ *
+ *  @param image
+ *
+ *  @return
+ */
++ (UIImage *)decoderImage:(UIImage *)image decodeType:(AsynImageDecodeType)type
 {
-    return [image thumbnailImage:80 interpolationQuality:kCGInterpolationLow];
+    UIImage *decodedImage;
+    switch (type) {
+        case AsynImageDecodeTypeThumb:
+            decodedImage = [image thumbnailImage:80 interpolationQuality:kCGInterpolationLow];
+            break;
+        case AsynImageDecodeTypeNormal:
+            decodedImage = [image resizedImage:image.size interpolationQuality:kCGInterpolationDefault];
+            break;
+    }
+    return decodedImage;
+}
+
++ (NSString *)cacheKeyWithImageURL:(NSString *)imageURL decodeType:(AsynImageDecodeType)type
+{
+    NSString *key;
+    switch (type) {
+        case AsynImageDecodeTypeNormal:
+            key = [[self imageNameWithURL:imageURL] stringByAppendingString:@"_normal"];
+            break;
+        case AsynImageDecodeTypeThumb:
+            key = [[self imageNameWithURL:imageURL] stringByAppendingString:@"_thumb"];
+            break;
+    }
+    return key;
 }
 
 /*!

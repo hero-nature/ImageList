@@ -24,7 +24,7 @@
 - (void)configCell
 {
     if (self.data) {
-        [self.imageView setImageURL:self.data placeholderImage:[UIImage imageNamed:@"defaultImage"]];
+        [self.imageView setImageURL:self.data placeholderImage:[UIImage imageNamed:@"defaultImage"] decodeType:AsynImageDecodeTypeThumb];
     }
 }
 

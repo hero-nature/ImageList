@@ -10,4 +10,6 @@
 
 @interface ImageDetailViewController : UIViewController
 
+- (void)setDataSource:(NSArray *)array currentIndex:(NSInteger)index;
+
 @end
