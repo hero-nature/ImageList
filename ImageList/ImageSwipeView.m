@@ -87,6 +87,7 @@ typedef NS_ENUM(NSUInteger, ImageViewPosition) {
 {
     self.contentInset = UIEdgeInsetsMake(0, CGRectGetWidth(self.bounds), 0, CGRectGetWidth(self.bounds));
     self.leftScrollView.hidden = self.rightScrollView.hidden = NO;
+    self.leftScrollView.zoomScale = self.centerScrollView.zoomScale = self.rightScrollView.zoomScale = 1.0;
     NSInteger count = [_swipeViewDataSource numberOfImagesInSwipeView:self];
     if (self.currentIndex + 1 > count) {
         self.contentInset = UIEdgeInsetsMake(0, CGRectGetWidth(self.bounds), 0, 0);
@@ -100,7 +101,7 @@ typedef NS_ENUM(NSUInteger, ImageViewPosition) {
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    if (decelerate == NO)
+    if (scrollView == self && decelerate == NO)
         [self scrollViewDidEndDecelerating:scrollView];
 }
 
@@ -109,7 +110,17 @@ typedef NS_ENUM(NSUInteger, ImageViewPosition) {
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    [self resetLoopScroll];
+    if (scrollView == self) {
+        [self resetLoopScroll];
+    }
+}
+
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView;
+{
+    if (scrollView != self) {
+        return [scrollView viewWithTag:1];
+    }
+    return nil;
 }
 
 - (void)resetLoopScroll {

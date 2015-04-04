@@ -176,12 +176,21 @@
                                         <subviews>
                                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D0f-5q-GuP" userLabel="Left Scroll View">
                                                 <rect key="frame" x="-320" y="0.0" width="320" height="504"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="pXm-AL-GMY" id="ygl-HV-wt6"/>
+                                                </connections>
                                             </scrollView>
-                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OVn-ng-1ki" userLabel="Center Scroll View">
+                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" maximumZoomScale="2.5" translatesAutoresizingMaskIntoConstraints="NO" id="OVn-ng-1ki" userLabel="Center Scroll View">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="pXm-AL-GMY" id="uht-D8-uxQ"/>
+                                                </connections>
                                             </scrollView>
                                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NC0-VP-bJ3" userLabel="Right Scroll View">
                                                 <rect key="frame" x="320" y="0.0" width="320" height="504"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="pXm-AL-GMY" id="BYP-V7-bvH"/>
+                                                </connections>
                                             </scrollView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
